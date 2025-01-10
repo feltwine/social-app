@@ -37,6 +37,20 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('user_profiles', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('display_name')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('location')->nullable();
+            $table->string('website')->nullable();
+            $table->json('social_links')->nullable();
+            $table->string('avatar_path')->nullable();
+            $table->string('background_path')->nullable();
+            $table->string('background_color')->default('#FFFFFF');
+            $table->timestamps();
+        });
     }
 
     /**

@@ -42,9 +42,9 @@ return new class extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained('users');
-            $table->morphs('voteable');
+            $table->morphs('votable');
             $table->smallInteger('vote');  // Options +1, 0, -1
-            $table->unique(['user_id', 'voteable_id', 'voteable_type']);
+            $table->unique(['user_id', 'votable_id', 'votable_type']);
             $table->timestamps();
         });
     }
