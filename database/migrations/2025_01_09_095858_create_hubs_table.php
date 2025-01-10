@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('background_path')->nullable();
             $table->string('background_color')->default('#FFFFFF');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('moderators', function (Blueprint $table) {

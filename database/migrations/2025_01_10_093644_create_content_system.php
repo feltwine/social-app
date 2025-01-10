@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 300);
+            $table->string('slug')->unique();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('hub_id')->constrained('hubs')->cascadeOnDelete();
             $table->text('content');
             $table->integer('vote_count')->default(0);
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->fullText(['title', 'content']);
+            $table->index('vote_count');
         });
 
         Schema::create('post_images', function (Blueprint $table) {
@@ -37,6 +42,7 @@ return new class extends Migration
             $table->text('content');
             $table->integer('vote_count')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('votes', function (Blueprint $table) {
